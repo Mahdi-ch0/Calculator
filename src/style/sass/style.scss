@@ -1,0 +1,136 @@
+$numberColor: #333333;
+$operatorColor: #ff9f0a;
+$clearColor: #a5a5a5;
+$textColor: white;
+
+*,
+*:before,
+*::after {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-weight: normal;
+}
+
+body {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    background-color: black;
+    height: 165rem;
+    width: 85rem;
+    margin-bottom: -10rem;
+    border-radius: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 19rem;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 550px;
+        background-color: black;
+        bottom: 2390px;
+        border-radius: 10rem;
+        z-index: -2;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 500px;
+        height: 20px;
+        background-color: white;
+        bottom: 60px;
+        border-radius: 10rem;
+    }
+
+    .calculator__border-phone {
+        height: 195rem;
+        position: absolute;
+        top: -26rem;
+        z-index: -1;   
+    }
+
+
+    .calculator-grid {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        // min-height: 100vh;
+        grid-template-columns: repeat(4, 255px);
+        grid-template-rows: minmax(120px, auto) repeat(5, 240px);
+        gap: 3rem;
+        row-gap: 4rem;
+
+        .output {
+            grid-column: 1 / -1;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 10px;
+            word-wrap: break-word;
+            word-break: break-all;
+            margin-left: 2rem;
+            width: 68rem;
+
+            .previous-operand {
+                color: rgba(255, 255, 255, 0.75);
+                font-size: 7rem;
+            }
+
+            .current-operand {
+                color: white;
+                font-size: 17rem;
+            }
+        }
+
+        button {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 7.2rem;
+            height: 17rem;
+            width: 17rem;
+            // padding: 4rem;
+            outline: none;
+            border: none;
+            background-color: $numberColor;
+            color: $textColor;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            border-radius: 10rem;
+
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+
+        button:not([data-number]):not([not]) {
+            background-color: $operatorColor;
+        }
+
+        button:not([data-number]):not([data-operation]):not([data-equals]),
+        button[not] {
+            background-color: $clearColor;
+            color: black;
+        }
+
+        [zero] {
+            grid-column: 1 / span 2;
+            text-align: left;
+            width: 100%;
+            word-spacing: 5rem;
+        }
+    }
+}
